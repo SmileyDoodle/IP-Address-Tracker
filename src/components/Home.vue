@@ -7,7 +7,7 @@
                 <input
                     class="input is-small is-rounded"  
                     type="text" 
-                    placeholder="IP Address or domain..." 
+                    placeholder="IP Address..." 
                     v-model="query"
                     @keyup.enter="getIP()" 
                     ref="searchBar"
@@ -19,11 +19,11 @@
             <div class="info-wrap">
                 <div class="detail-box">
                     <h6 class="has-text-weight-medium">IP ADDRESS</h6>
-                    <p class="has-text-weight-light"> {{this.json.query}} </p>
+                    <p class="has-text-weight-light"> {{this.json.ip}} </p>
                 </div>
                 <div class="detail-box">
                     <h6 class="has-text-weight-medium">LOCATION</h6>
-                    <p class="has-text-weight-light"> {{this.json.country}} </p>
+                    <p class="has-text-weight-light"> {{this.json.country_name}} </p>
                 </div>
                 <div class="detail-box">
                     <h6 class="has-text-weight-medium">TIMEZONE</h6>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="detail-box">
                     <h6 class="has-text-weight-medium">ISP</h6>
-                    <p class="has-text-weight-light"> {{this.json.isp}} </p>
+                    <p class="has-text-weight-light"> {{this.json.org}} </p>
                 </div>
             </div>
             <div class="error-wrap" v-if="error"> 
@@ -59,7 +59,7 @@ export default {
     methods: {
         getIP() {
             this.error = '';
-            fetch(`http://ip-api.com/json/${this.query}`)
+            fetch(`https://ipapi.co/${this.query ? this.query + '/' : ''}json/`)
                 .then(res => {
                     return res.json();
                 }).then(result => {
@@ -77,12 +77,12 @@ export default {
             var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/dark-v10',
-            center: [this.json.lon, this.json.lat],
+            center: [this.json.longitude, this.json.latitude],
             zoom: 11
             });
             
             new mapboxgl.Marker()
-            .setLngLat([this.json.lon, this.json.lat])
+            .setLngLat([this.json.longitude, this.json.latitude])
             .addTo(map);
     
             map.on('load', function () {
