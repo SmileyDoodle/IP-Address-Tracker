@@ -40,7 +40,6 @@
         </div>
       </div>
       <div id="map">
-
       </div>
   </div>
 </template>
@@ -60,7 +59,6 @@ export default {
     methods: {
         getIP() {
             this.error = '';
-
             fetch(`http://ip-api.com/json/${this.query}`)
                 .then(res => {
                     return res.json();
@@ -70,8 +68,6 @@ export default {
                     this.query = "";
                     this.$refs.searchBar.blur();
                 }).catch((err) => {
-                    console.log(err);
-                    // this.isLoading = false;
                     this.query = "";
                     this.error = err;
                 })
@@ -114,31 +110,29 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 30%;
+    height: 40%;
     background-color: #454545;
 }
 #header h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #fff;
-    margin: 2.5rem 0 1rem;
+    margin: 2.5rem 0 0.5rem;
 }
 #search {
     position: absolute;
     z-index: 1;
-    top: 110px;
-    height: 200px;
-    width: 65%;
+    top: 95px;
+    height: 250px;
+    width: 80%;
     margin: 0 auto;
     border-radius: 15px;
     background-color: #fff;
     box-shadow: 0px 7px 7px 1px rgb(10 10 10 / 72%);
-
-
 }
 .search-wrap {
     display: flex;
-    width: 40%;
-    margin: 2.5rem auto 1rem;
+    width: 75%;
+    margin: 2rem auto 1rem;
 }
 .search-wrap input {
     margin: 0 0.5rem;
@@ -147,6 +141,53 @@ export default {
     margin: 0 0.5rem;
     color: #fff;
     background-color: #61aeca;
+    padding: 10px !important;
+}
+.detail-box {
+    margin: 1.3rem 0 0.5rem;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+.detail-box h6 {
+    font-size: 0.7rem;
+    color: #454545;
+}
+.detail-box p {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+.info-wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: center;
+}
+.error-wrap {
+    margin-top: 5rem;
+}
+#map {
+    height: 60%;
+}
+
+
+@media only screen and (min-width: 1024px) {
+#header {
+    height: 30%;
+}
+#header h1 {
+    font-size: 1.5rem;
+    margin: 2.5rem 0 1rem;
+}
+#search {
+    top: 110px;
+    height: 200px;
+    width: 65%;
+}
+.search-wrap {
+    width: 40%;
+    margin: 2.5rem auto 1rem;
 }
 .detail-box {
     padding: 0 3rem;
@@ -158,10 +199,6 @@ export default {
 }
 .detail-box h6 {
     font-size: 0.8rem;
-    color: #454545;
-}
-.button {
-    padding: 10px !important;
 }
 .detail-box p {
     font-size: 1rem;
@@ -169,6 +206,7 @@ export default {
 }
 .info-wrap {
     display: flex;
+    flex-wrap: unset;
     justify-content: center;
 }
 .error-wrap {
@@ -176,5 +214,6 @@ export default {
 }
 #map {
     height: 70%;
+}
 }
 </style>
