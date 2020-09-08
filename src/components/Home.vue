@@ -59,7 +59,7 @@ export default {
     methods: {
         getIP() {
             this.error = '';
-            fetch(`//ip-api.com/json/${this.query}`)
+            fetch(`http://ip-api.com/json/${this.query}`)
                 .then(res => {
                     return res.json();
                 }).then(result => {
